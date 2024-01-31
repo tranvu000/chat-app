@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
     email: '',
     password: ''
   });
-console.log(user);
+
   useEffect(() => {
     const user = localStorage.getItem("User");
 
@@ -41,6 +41,11 @@ console.log(user);
     setUser(response);
   }, [registerInfo]);
 
+  const logoutUser = useCallback(() => {
+    localStorage.removeItem("User");
+    setUser(null);
+  },[]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -49,7 +54,8 @@ console.log(user);
         updateRegisterInfo,
         registerUser,
         registerError,
-        isRegisterLoading
+        isRegisterLoading,
+        logoutUser
       }}
     >
       {children}
