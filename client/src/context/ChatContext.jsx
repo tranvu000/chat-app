@@ -20,8 +20,6 @@ export const ChatContextProvider = ({ children, user }) => {
   const [notifications, setNotifications] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
 
-  console.log("notifications", notifications);
-
   useEffect(() => {
     const newSocket = io("https://server-chat-app-62ph.onrender.com");
     setSocket(newSocket);

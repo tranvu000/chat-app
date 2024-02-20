@@ -24,8 +24,6 @@ const Notification = () => {
       senderName: sender?.name
     };
   });
-  console.log("unreadNotifications", unreadNotifications);
-  console.log("modifiedNotifications", modifiedNotifications);
 
   return (
     <div className="notifications">
