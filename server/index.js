@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const http = require('http');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -10,7 +11,7 @@ const messageRoute = require('./Routes/messageRoute');
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server, { cors: "http://localhost:5173" });
+const io = new Server(server, { cors: process.env.CLIENT_URL });
 
 require('dotenv').config();
 
