@@ -17,6 +17,19 @@ const ChatBox = () => {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const handleSendMessage = () => {
+    if (textMessage.trim() !== "") {
+      sendTextMessage(textMessage, user, currentChat._id, setTextMessage);
+    }
+  };
+
   if (!recipientUser) {
     return (
       <p style={{ textAlign: "center", width: "100%" }}>
@@ -59,8 +72,9 @@ const ChatBox = () => {
           onChange={setTextMessage}
           fontFamily="nunito"
           borderColor="rgba(72, 112, 223, 0.2)"
+          onKeyDown={handleKeyDown}
         />
-        <button className="send-btn" onClick={() => sendTextMessage(textMessage, user, currentChat._id, setTextMessage)}>
+        <button className="send-btn" onClick={handleSendMessage} disabled={!textMessage.trim()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
