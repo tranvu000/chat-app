@@ -21,7 +21,7 @@ export const ChatContextProvider = ({ children, user }) => {
   const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
-    const newSocket = io("https://server-chat-app-62ph.onrender.com");
+    const newSocket = io(baseUrl);
     setSocket(newSocket);
 
     return () => {
@@ -79,7 +79,7 @@ export const ChatContextProvider = ({ children, user }) => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const response = await getRequest(`${baseUrl}/users`);
+      const response = await getRequest(`${baseUrl}/api/users`);
 
       if (response.error) {
         return console.log("Error fetching users", response);
@@ -112,7 +112,7 @@ export const ChatContextProvider = ({ children, user }) => {
         setIsUserChatsLoading(true);
         setUserChatsError(null);
 
-        const response = await getRequest(`${baseUrl}/chats/${user?._id}`);
+        const response = await getRequest(`${baseUrl}/api/chats/${user?._id}`);
 
         setIsUserChatsLoading(false);
 
@@ -132,7 +132,7 @@ export const ChatContextProvider = ({ children, user }) => {
       setIsMessagesLoading(true);
       setMessagesError(null);
 
-      const response = await getRequest(`${baseUrl}/messages/${currentChat?._id}`);
+      const response = await getRequest(`${baseUrl}/api/messages/${currentChat?._id}`);
 
       setIsMessagesLoading(false);
 
@@ -151,7 +151,7 @@ export const ChatContextProvider = ({ children, user }) => {
       return console.log("You must type something");
     }
 
-    const response = await postRequest(`${baseUrl}/messages`, JSON.stringify({
+    const response = await postRequest(`${baseUrl}/api/messages`, JSON.stringify({
       chatId: currentChatId,
       senderId: sender._id,
       text: textMessage
@@ -171,7 +171,7 @@ export const ChatContextProvider = ({ children, user }) => {
   }, []);
 
   const createChat = useCallback( async (firstId, secondId) => {
-    const response = await postRequest(`${baseUrl}/chats`, JSON.stringify({firstId, secondId}));
+    const response = await postRequest(`${baseUrl}/api/chats`, JSON.stringify({firstId, secondId}));
 
     if (response.error) {
       return console.log("Error fetching chats", response);

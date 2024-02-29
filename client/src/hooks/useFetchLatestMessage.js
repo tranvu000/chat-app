@@ -8,7 +8,7 @@ export const useFetchLatestMessage = (chat) => {
 
   useEffect(() => {
     const getMessages = async () => {
-      const response = await getRequest(`${baseUrl}/messages/${chat?._id}`);
+      const response = await getRequest(`${baseUrl}/api/messages/${chat?._id}`);
 
       if (response.error) {
         return console.log("Error getting messages", error);

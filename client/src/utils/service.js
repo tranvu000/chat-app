@@ -1,4 +1,4 @@
-export const baseUrl = "http://localhost:5000/api";
+export const baseUrl = "https://server-chat-app-62ph.onrender.com";
 
 export const postRequest = async (url, body) => {
   const response = await fetch(url, {
